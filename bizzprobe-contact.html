@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Now — BizzProbe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --paper:#f5f8f8;
+    --navy:#0a2240;
+    --navy-soft:#123259;
+    --navy-deep:#071829;
+    --teal:#00a88f;
+    --teal-tint:#e3f5f1;
+    --ink:#132033;
+    --mist:#5c6b80;
+    --mist-light:#c8d2de;
+    --line:#e3e8ee;
+    --error:#d64545;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
+  body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em;}
+  .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; }
+  .eyebrow::before{content:"// "; opacity:0.55;}
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-family:'Inter', sans-serif; font-weight:600; font-size:14.5px; padding:14px 26px; border-radius:3px; cursor:pointer; border:1.5px solid transparent; transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, color .25s ease; }
+  .btn-teal{ background:var(--teal); color:var(--white); }
+  .btn-teal:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(0,168,143,0.55); }
+  .btn-outline-light{ border-color:rgba(255,255,255,0.4); color:var(--white); }
+  .btn-outline-light:hover{ border-color:var(--white); background:rgba(255,255,255,0.08); }
+  .btn-outline-navy{ border-color:var(--navy); color:var(--navy); }
+  .btn-outline-navy:hover{ background:var(--navy); color:var(--white); }
+  ::selection{ background:var(--teal); color:var(--white); }
+  :focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
+
+  header{ position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); transition:padding .3s ease, box-shadow .3s ease; }
+  header.condensed{ box-shadow:0 6px 24px -14px rgba(10,34,64,0.25); }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; padding:20px 32px; max-width:var(--maxw); margin:0 auto; transition:padding .3s ease; }
+  header.condensed .nav-row{ padding:13px 32px; }
+  .logo{ display:flex; align-items:center; gap:10px; }
+  .logo-mark{ width:26px; height:26px; flex-shrink:0; }
+  .logo-text{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; color:var(--navy); }
+  .logo-text span{ color:var(--teal); }
+  .logo-tagline{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--mist); letter-spacing:0.05em; margin-left:12px; padding-left:12px; border-left:1px solid var(--line); }
+  nav ul{ display:flex; align-items:center; gap:30px; }
+  nav a:not(.btn){ font-size:14.5px; font-weight:500; color:var(--ink); position:relative; padding:4px 0; }
+  nav a:not(.btn)::after{ content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--teal); transition:width .25s ease; }
+  nav a:not(.btn):hover::after, nav a.active::after{ width:100%; }
+  .nav-cta{ display:flex; align-items:center; gap:20px; }
+  .hamburger{ display:none; }
+
+  @media (max-width:900px){
+    .logo-tagline{display:none;}
+    nav ul.nav-links{ position:fixed; inset:0 0 0 auto; width:78%; max-width:320px; height:100vh; background:var(--navy); flex-direction:column; align-items:flex-start; padding:100px 32px 40px; gap:26px; transform:translateX(100%); transition:transform .35s ease; z-index:99; }
+    nav ul.nav-links.open{ transform:translateX(0); }
+    nav ul.nav-links a:not(.btn){ color:var(--white); font-size:18px; }
+    .hamburger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; z-index:101; padding:6px; }
+    .hamburger span{ width:22px; height:2px; background:var(--navy); display:block; }
+    .nav-cta .btn-teal{ padding:11px 18px; font-size:13.5px; }
+  }
+
+  .page-hero{ background:var(--navy); color:var(--white); padding:90px 0 76px; position:relative; overflow:hidden; }
+  .page-hero::before{ content:""; position:absolute; top:-40%; right:-10%; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle, rgba(0,168,143,0.16), transparent 70%); }
+  .page-hero .wrap{ position:relative; z-index:2; max-width:760px; }
+  .page-hero .eyebrow{ color:var(--teal); display:block; margin-bottom:18px; }
+  .page-hero h1{ font-size:clamp(32px, 4.6vw, 52px); font-weight:700; line-height:1.12; margin-bottom:20px; }
+  .page-hero p{ font-size:17px; line-height:1.7; color:var(--mist-light); max-width:60ch; }
+
+  section{ padding:100px 0; }
+
+  /* ---------- CONTACT SHELL ---------- */
+  .contact{ background:var(--white); }
+  .contact-shell{
+    display:grid; grid-template-columns:0.82fr 1.18fr; gap:0; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+    box-shadow:0 30px 60px -35px rgba(10,34,64,0.3);
+  }
+  .contact-side{ background:var(--navy); color:var(--white); padding:48px 42px; position:relative; overflow:hidden; }
+  .contact-side::before{ content:""; position:absolute; bottom:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:radial-gradient(circle, rgba(0,168,143,0.18), transparent 70%); }
+  .contact-side .eyebrow{ color:var(--teal); display:block; margin-bottom:16px; position:relative; z-index:1; }
+  .contact-side h3{ font-size:23px; font-weight:700; margin-bottom:16px; line-height:1.35; position:relative; z-index:1; }
+  .contact-side p{ font-size:14.5px; line-height:1.7; color:var(--mist-light); margin-bottom:34px; position:relative; z-index:1; }
+
+  .contact-item{ margin-bottom:22px; position:relative; z-index:1; }
+  .contact-item h5{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+  .contact-item a, .contact-item span{ font-size:14.5px; color:var(--white); font-weight:500; }
+
+  .reassurance{
+    margin-top:36px; padding-top:26px; border-top:1px solid rgba(255,255,255,0.14); position:relative; z-index:1;
+    font-size:13px; line-height:1.65; color:var(--mist-light);
+  }
+
+  .contact-form-area{ padding:48px 44px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+  .form-group{ display:flex; flex-direction:column; gap:7px; }
+  .form-group.full{ grid-column:1 / -1; }
+  label{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--mist); }
+  input, select, textarea{
+    font-family:'Inter', sans-serif; font-size:14.5px; padding:12px 14px; border:1px solid var(--line); border-radius:6px;
+    color:var(--ink); background:var(--white); transition:border-color .2s ease, box-shadow .2s ease; width:100%;
+  }
+  input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(0,168,143,0.15); }
+  textarea{ resize:vertical; min-height:90px; font-family:'Inter', sans-serif; }
+  .contact-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+  .contact-actions .btn{ flex:1; justify-content:center; min-width:200px; }
+  #contact-status{ font-size:12.5px; color:var(--mist); margin-top:14px; display:none; }
+
+  @media (max-width:900px){
+    .contact-shell{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; }
+  }
+  @media (max-width:560px){
+    .contact-side, .contact-form-area{ padding:32px 24px; }
+    section{ padding:64px 0; }
+  }
+
+  /* ---------- ALT CONTACT STRIP ---------- */
+  .alt-contact{ background:var(--paper); text-align:center; }
+  .alt-contact .eyebrow{ color:var(--teal); display:block; margin-bottom:14px; }
+  .alt-contact h2{ font-size:clamp(22px, 2.8vw, 30px); font-weight:700; color:var(--navy); margin-bottom:24px; }
+  .alt-row{ display:flex; justify-content:center; gap:34px; flex-wrap:wrap; }
+  .alt-item{ display:flex; flex-direction:column; gap:4px; }
+  .alt-item span{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--mist); text-transform:uppercase; letter-spacing:0.06em; }
+  .alt-item a{ font-size:15px; font-weight:600; color:var(--navy); transition:color .2s ease; }
+  .alt-item a:hover{ color:var(--teal); }
+
+  /* ---------- FOOTER (shared) ---------- */
+  footer{ background:var(--navy); color:var(--white); padding:72px 0 0; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1.3fr 1fr; gap:40px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,0.12); }
+  .footer-logo{ display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+  .footer-logo .logo-text{ color:var(--white); }
+  .footer-logo .logo-text span{ color:var(--teal); }
+  .footer-tag{ font-size:13px; color:var(--mist-light); line-height:1.6; margin-bottom:16px; }
+  .footer-desc{ font-size:13px; color:var(--mist-light); line-height:1.65; max-width:34ch; }
+  .footer-col h5{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:18px; font-weight:600; }
+  .footer-col ul{ display:flex; flex-direction:column; gap:11px; }
+  .footer-col a{ font-size:13.8px; color:var(--mist-light); transition:color .2s ease; }
+  .footer-col a:hover{ color:var(--white); }
+  .footer-contact-btn{ margin-top:18px; }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding:26px 0; font-size:12.5px; color:var(--mist-light); }
+  .footer-bottom .legal-links{ display:flex; gap:22px; }
+  .footer-closing{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal); padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); opacity:0.85; }
+
+  @media (max-width:900px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .footer-grid{ grid-template-columns:1fr; } }
+
+  [data-reveal]{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  [data-reveal].in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- WHATSAPP ---------- */
+  .contact-item-icon{ display:flex; align-items:center; gap:10px; }
+  .wa-icon{ width:20px; height:20px; flex-shrink:0; }
+  .wa-icon svg{ width:100%; height:100%; }
+  .alt-item a.wa-link{ display:inline-flex; align-items:center; gap:8px; }
+  .alt-item .wa-icon svg{ fill:var(--teal); }
+
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:200;
+    width:58px; height:58px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(37,211,102,0.6);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .wa-float:hover{ transform:translateY(-4px) scale(1.05); box-shadow:0 18px 36px -10px rgba(37,211,102,0.7); }
+  .wa-float svg{ width:28px; height:28px; fill:var(--white); }
+  .wa-float .wa-pulse{
+    position:absolute; inset:0; border-radius:50%; background:#25D366; opacity:0.55;
+    animation:waPulse 2.2s ease-out infinite;
+  }
+  @keyframes waPulse{
+    0%{ transform:scale(1); opacity:0.5; }
+    100%{ transform:scale(1.7); opacity:0; }
+  }
+
+  @media (max-width:560px){
+    .wa-float{ bottom:18px; right:18px; width:52px; height:52px; }
+    .wa-float svg{ width:25px; height:25px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    [data-reveal]{ opacity:1 !important; transform:none !important; }
+    .wa-pulse{ display:none; }
+  }
+
+  /* ---------- NAV BACKDROP (mobile menu overlay) ---------- */
+  .nav-backdrop{
+    position:fixed; inset:0; background:rgba(7,24,41,0.6); backdrop-filter:blur(2px);
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; z-index:98;
+  }
+  .nav-backdrop.open{ opacity:1; visibility:visible; }
+  body.menu-open{ overflow:hidden; }
+  @media (min-width:901px){ .nav-backdrop{ display:none !important; } }
+</style>
+</head>
+<body>
+<div class="nav-backdrop" id="nav-backdrop"></div>
+
+<!-- ================= WHATSAPP FLOATING BUTTON ================= -->
+<a href="https://wa.me/923049775699" class="wa-float" target="_blank" rel="noopener" aria-label="Chat with BizzProbe on WhatsApp">
+  <span class="wa-pulse"></span>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.36-.01-.56-.01-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34zM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.43A9.94 9.94 0 0 0 12.02 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.18c-1.68 0-3.24-.48-4.56-1.31l-.33-.2-3.02.87.88-2.94-.21-.34a8.18 8.18 0 0 1-1.28-4.38c0-4.52 3.68-8.18 8.18-8.18 4.5 0 8.18 3.66 8.18 8.18 0 4.52-3.68 8.18-8.18 8.18z"/></svg>
+</a>
+
+<header id="site-header">
+  <div class="nav-row">
+    <a href="bizzprobe-home.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none">
+        <circle cx="14" cy="14" r="9" stroke="#00A88F" stroke-width="2.4"/>
+        <circle cx="14" cy="14" r="3.4" fill="#00A88F"/>
+        <line x1="20.5" y1="20.5" x2="28" y2="28" stroke="#0A2240" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">Bizz<span>Probe</span></span>
+      <span class="logo-tagline">PROBE BEFORE YOU DECIDE.</span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="bizzprobe-home.html">Home</a></li>
+        <li><a href="bizzprobe-services.html">Our Services</a></li>
+        <li><a href="bizzprobe-edge.html">Our Edge</a></li>
+        <li><a href="bizzprobe-about.html">What We Are</a></li>
+        <li><a href="bizzprobe-join.html">Join as an Expert</a></li>
+        <li class="nav-cta"><a href="#" class="btn btn-teal" style="pointer-events:none; opacity:0.85;">Contact Now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Get in Touch</span>
+    <h1>Ready to see what's beneath the surface?</h1>
+    <p>The cost of an unexamined decision is always paid later — and always paid in full. Let's probe before you decide.</p>
+  </div>
+</section>
+
+<!-- ================= CONTACT FORM ================= -->
+<section class="contact">
+  <div class="wrap">
+    <div class="contact-shell" data-reveal>
+      <div class="contact-side">
+        <span class="eyebrow">Confidential Inquiry</span>
+        <h3>Every conversation starts here — no commitment, no obligation.</h3>
+        <p>Tell us what you're trying to understand. We'll tell you which scan gets you an answer, and what it would actually take.</p>
+
+        <div class="contact-item">
+          <h5>Email</h5>
+          <a href="mailto:hello@bizzprobe.com">hello@bizzprobe.com</a>
+        </div>
+        <div class="contact-item">
+          <h5>Phone</h5>
+          <a href="tel:+920000000000">+92 000 0000000</a>
+        </div>
+        <div class="contact-item">
+          <h5>WhatsApp</h5>
+          <a href="https://wa.me/923049775699" target="_blank" rel="noopener" class="contact-item-icon">
+            <span class="wa-icon"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.36-.01-.56-.01-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34zM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.43A9.94 9.94 0 0 0 12.02 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.18c-1.68 0-3.24-.48-4.56-1.31l-.33-.2-3.02.87.88-2.94-.21-.34a8.18 8.18 0 0 1-1.28-4.38c0-4.52 3.68-8.18 8.18-8.18 4.5 0 8.18 3.66 8.18 8.18 0 4.52-3.68 8.18-8.18 8.18z"/></svg></span>
+            +92 304 9775699
+          </a>
+        </div>
+        <div class="contact-item">
+          <h5>LinkedIn</h5>
+          <a href="#">linkedin.com/company/bizzprobe</a>
+        </div>
+
+        <p class="reassurance">Every inquiry is confidential. No commitment, no obligation — just a conversation about what you might be missing.</p>
+      </div>
+
+      <div class="contact-form-area">
+        <form action="https://formspree.io/f/mnjvrrvr" method="POST" id="contact-form">
+          <input type="hidden" name="_subject" value="Confidential Scan Inquiry — BizzProbe" />
+          <div class="form-row">
+            <div class="form-group"><label for="c-name">Name</label><input type="text" id="c-name" name="name" placeholder="Full name" required></div>
+            <div class="form-group"><label for="c-company">Company</label><input type="text" id="c-company" name="company" placeholder="Company name" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="c-role">Role</label><input type="text" id="c-role" name="role" placeholder="Your role"></div>
+            <div class="form-group"><label for="c-email">Business Email</label><input type="email" id="c-email" name="_replyto" placeholder="you@company.com" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="c-phone">Phone</label><input type="tel" id="c-phone" name="phone" placeholder="+92 000 0000000"></div>
+            <div class="form-group">
+              <label for="c-scope">Preferred Scan Domain</label>
+              <select id="c-scope" name="scan_domain">
+                <option>Strategy</option>
+                <option>Financial</option>
+                <option>Operations</option>
+                <option>Product &amp; Technology</option>
+                <option>Capability &amp; People</option>
+                <option>Not Sure Yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full"><label for="c-what">What Are You Trying to Understand?</label><textarea id="c-what" name="message" placeholder="Briefly describe the decision, concern or question behind this inquiry."></textarea></div>
+          </div>
+          <div class="contact-actions">
+            <button type="submit" class="btn btn-teal">Submit for a Confidential Scan</button>
+            <a href="mailto:hello@bizzprobe.com?subject=Discovery%20Call%20Request" class="btn btn-outline-navy">Book a 20-Minute Discovery Call</a>
+          </div>
+          <p id="contact-status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALT CONTACT STRIP ================= -->
+<section class="alt-contact">
+  <div class="wrap" data-reveal>
+    <span class="eyebrow">Prefer to Talk Directly?</span>
+    <h2>Reach us however works best for you.</h2>
+    <div class="alt-row">
+      <div class="alt-item"><span>Email</span><a href="mailto:hello@bizzprobe.com">hello@bizzprobe.com</a></div>
+      <div class="alt-item"><span>Phone</span><a href="tel:+920000000000">+92 000 0000000</a></div>
+      <div class="alt-item">
+        <span>WhatsApp</span>
+        <a href="https://wa.me/923049775699" target="_blank" rel="noopener" class="wa-link">
+          <span class="wa-icon"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.36-.01-.56-.01-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34zM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.43A9.94 9.94 0 0 0 12.02 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.18c-1.68 0-3.24-.48-4.56-1.31l-.33-.2-3.02.87.88-2.94-.21-.34a8.18 8.18 0 0 1-1.28-4.38c0-4.52 3.68-8.18 8.18-8.18 4.5 0 8.18 3.66 8.18 8.18 0 4.52-3.68 8.18-8.18 8.18z"/></svg></span>
+          +92 304 9775699
+        </a>
+      </div>
+      <div class="alt-item"><span>LinkedIn</span><a href="#">linkedin.com/company/bizzprobe</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <svg class="logo-mark" viewBox="0 0 32 32" fill="none">
+            <circle cx="14" cy="14" r="9" stroke="#00A88F" stroke-width="2.4"/>
+            <circle cx="14" cy="14" r="3.4" fill="#00A88F"/>
+            <line x1="20.5" y1="20.5" x2="28" y2="28" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-text">Bizz<span>Probe</span></span>
+        </div>
+        <p class="footer-tag">Business Intelligence &amp; Organizational Scanning<br>Probe Before You Decide.</p>
+        <p class="footer-desc">We investigate what's beneath the surface — so you decide with evidence, not assumptions.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="bizzprobe-home.html">Home</a></li>
+          <li><a href="bizzprobe-services.html">Our Services</a></li>
+          <li><a href="bizzprobe-edge.html">Our Edge</a></li>
+          <li><a href="bizzprobe-about.html">What We Are</a></li>
+          <li><a href="bizzprobe-join.html">Join as an Expert</a></li>
+          <li><a href="#">Contact Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Our Domains</h5>
+        <ul>
+          <li><a href="bizzprobe-services.html">Strategy &amp; Market Intelligence</a></li>
+          <li><a href="bizzprobe-services.html">Financial &amp; Commercial Intelligence</a></li>
+          <li><a href="bizzprobe-services.html">Operations &amp; Organizational Intelligence</a></li>
+          <li><a href="bizzprobe-services.html">Product, Digital &amp; Technology Intelligence</a></li>
+          <li><a href="bizzprobe-services.html">Capability &amp; People Intelligence</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in Touch</h5>
+        <ul>
+          <li><a href="mailto:hello@bizzprobe.com">hello@bizzprobe.com</a></li>
+          <li><a href="tel:+920000000000">+92 000 0000000</a></li>
+          <li><a href="#">Lahore, Pakistan</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+        <a href="#" class="btn btn-teal footer-contact-btn" style="pointer-events:none; opacity:0.85;">Book a Scan</a>
+      </div>
+    </div>
+
+    <div class="footer-closing">// What you don't scan for is exactly what finds you first.</div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> BizzProbe. All rights reserved.</span>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Confidentiality Commitment</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => header.classList.toggle('condensed', window.scrollY > 40));
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  const navBackdrop = document.getElementById('nav-backdrop');
+  function setMenuOpen(isOpen){
+    navLinks.classList.toggle('open', isOpen);
+    if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+  }
+  hamburger.addEventListener('click', () => {
+    setMenuOpen(!navLinks.classList.contains('open'));
+  });
+  if (navBackdrop) navBackdrop.addEventListener('click', () => setMenuOpen(false));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)));
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('in'));
+  }
+
+  // Contact form submission (Formspree)
+  const contactForm = document.getElementById('contact-form');
+  const contactStatus = document.getElementById('contact-status');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      contactStatus.style.display = 'block';
+      contactStatus.style.color = 'var(--mist)';
+      contactStatus.textContent = '';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.reset();
+          contactStatus.style.color = 'var(--teal)';
+          contactStatus.textContent = 'Received — we\'ll be in touch shortly.';
+        } else {
+          contactStatus.style.color = 'var(--error)';
+          contactStatus.textContent = 'Something went wrong. Please try again or email us directly.';
+        }
+      } catch (err) {
+        contactStatus.style.color = 'var(--error)';
+        contactStatus.textContent = 'Network error — please try again or email us directly.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
