@@ -23,7 +23,7 @@
     --maxw:1180px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--white); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
@@ -194,9 +194,47 @@
     [data-reveal], .word-part{ opacity:1 !important; transform:none !important; }
     .flip-card:hover .flip-inner{ transform:none; }
   }
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:200;
+    width:58px; height:58px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(37,211,102,0.6);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .wa-float:hover{ transform:translateY(-4px) scale(1.05); box-shadow:0 18px 36px -10px rgba(37,211,102,0.7); }
+  .wa-float svg{ width:28px; height:28px; fill:#ffffff; }
+  .wa-float .wa-pulse{
+    position:absolute; inset:0; border-radius:50%; background:#25D366; opacity:0.55;
+    animation:waPulse 2.2s ease-out infinite;
+  }
+  @keyframes waPulse{
+    0%{ transform:scale(1); opacity:0.5; }
+    100%{ transform:scale(1.7); opacity:0; }
+  }
+  @media (max-width:560px){
+    .wa-float{ bottom:18px; right:18px; width:52px; height:52px; }
+    .wa-float svg{ width:25px; height:25px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wa-pulse{ display:none; }
+  }
+
+
+  /* ---------- NAV BACKDROP (mobile menu overlay) ---------- */
+  .nav-backdrop{
+    position:fixed; inset:0; background:rgba(7,24,41,0.6); backdrop-filter:blur(2px);
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; z-index:98;
+  }
+  .nav-backdrop.open{ opacity:1; visibility:visible; }
+  body.menu-open{ overflow:hidden; }
+  @media (min-width:901px){ .nav-backdrop{ display:none !important; } }
 </style>
 </head>
 <body>
+<div class="nav-backdrop" id="nav-backdrop"></div>
+<a href="https://wa.me/923049775699" class="wa-float" target="_blank" rel="noopener" aria-label="Chat with BizzProbe on WhatsApp"><span class="wa-pulse"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.49.1-.19.05-.36-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.36-.01-.56-.01-.19 0-.51.07-.78.36-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34zM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.9.53 3.68 1.44 5.2L2 22l4.94-1.43A9.94 9.94 0 0 0 12.02 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.18c-1.68 0-3.24-.48-4.56-1.31l-.33-.2-3.02.87.88-2.94-.21-.34a8.18 8.18 0 0 1-1.28-4.38c0-4.52 3.68-8.18 8.18-8.18 4.5 0 8.18 3.66 8.18 8.18 0 4.52-3.68 8.18-8.18 8.18z"/></svg></a>
 
 <header id="site-header">
   <div class="nav-row">
@@ -214,12 +252,12 @@
     </button>
     <nav>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="bizzprobe-home.html">Home</a></li>
         <li><a href="bizzprobe-services.html">Our Services</a></li>
         <li><a href="bizzprobe-edge.html">Our Edge</a></li>
         <li><a href="#" class="active">What We Are</a></li>
         <li><a href="bizzprobe-join.html">Join as an Expert</a></li>
-        <li class="nav-cta"><a href="#contact" class="btn btn-teal">Contact Now</a></li>
+        <li class="nav-cta"><a href="bizzprobe-contact.html" class="btn btn-teal">Contact Now</a></li>
       </ul>
     </nav>
   </div>
@@ -360,7 +398,7 @@
   <div class="wrap" data-reveal>
     <h2>Want to know what we'd find in yours?</h2>
     <p>Every engagement starts with a conversation, not a proposal.</p>
-    <a href="#" class="btn btn-teal">Start Your Probe</a>
+    <a href="bizzprobe-contact.html" class="btn btn-teal">Start Your Probe</a>
   </div>
 </section>
 
@@ -387,7 +425,7 @@
           <li><a href="bizzprobe-edge.html">Our Edge</a></li>
           <li><a href="#">What We Are</a></li>
           <li><a href="bizzprobe-join.html">Join as an Expert</a></li>
-          <li><a href="#contact">Contact Now</a></li>
+          <li><a href="bizzprobe-contact.html">Contact Now</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -404,11 +442,11 @@
         <h5>Get in Touch</h5>
         <ul>
           <li><a href="mailto:hello@bizzprobe.com">hello@bizzprobe.com</a></li>
-          <li><a href="#">+92 000 0000000</a></li>
+          <li><a href="#">+92 304 9775699</a></li>
           <li><a href="#">Lahore, Pakistan</a></li>
           <li><a href="#">LinkedIn</a></li>
         </ul>
-        <a href="#contact" class="btn btn-teal footer-contact-btn">Book a Scan</a>
+        <a href="bizzprobe-contact.html" class="btn btn-teal footer-contact-btn">Book a Scan</a>
       </div>
     </div>
 
@@ -433,14 +471,18 @@
 
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
+  const navBackdrop = document.getElementById('nav-backdrop');
+  function setMenuOpen(isOpen){
+    navLinks.classList.toggle('open', isOpen);
+    if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+  }
   hamburger.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', open);
+    setMenuOpen(!navLinks.classList.contains('open'));
   });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-  }));
+  if (navBackdrop) navBackdrop.addEventListener('click', () => setMenuOpen(false));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)));
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reduceMotion && 'IntersectionObserver' in window) {
