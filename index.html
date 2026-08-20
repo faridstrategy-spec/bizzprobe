@@ -331,6 +331,72 @@
   body.menu-open{ overflow:hidden; }
   @media (min-width:901px){ .nav-backdrop{ display:none !important; } }
 </style>
+  <!-- JSON-LD Structured Data for Search & AI Engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.bizzprobe.com/#organization",
+      "name": "BizzProbe",
+      "url": "https://www.bizzprobe.com/",
+      "logo": "https://www.bizzprobe.com/assets/logo.png",
+      "description": "BizzProbe is a multidisciplinary Business Intelligence Group helping decision-makers detect threats, audit risks, and analyze strategic opportunities.",
+      "email": "hello@bizzprobe.com",
+      "sameAs": [
+        "https://www.linkedin.com/company/bizzprobe"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.bizzprobe.com/#website",
+      "url": "https://www.bizzprobe.com/",
+      "name": "BizzProbe",
+      "publisher": {
+        "@id": "https://www.bizzprobe.com/#organization"
+      }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.bizzprobe.com/#service",
+      "name": "BizzProbe Business Intelligence Services",
+      "url": "https://www.bizzprobe.com/bizzprobe-services",
+      "provider": {
+        "@id": "https://www.bizzprobe.com/#organization"
+      },
+      "areaServed": "Global",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Business Intelligence Solutions",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Enterprise Risk & Vulnerability Scanning"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Operational & Capability Auditing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Market Opportunity & Strategic Threat Analysis"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="nav-backdrop" id="nav-backdrop"></div>
