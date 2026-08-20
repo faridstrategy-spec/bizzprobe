@@ -1,0 +1,31 @@
+# General Crawlers
+User-agent: *
+Allow: /
+
+# OpenAI Crawlers (ChatGPT & ChatGPT Search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Crawlers (Claude & Claude Search)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity Crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Google Gemini Training Crawler
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.bizzprobe.com/sitemap.xml
